@@ -59,30 +59,33 @@ To enable both XML and JSON request/response:
 
 ## 📥 Sample Requests
 
-### JSON Request
-```json
-{
-  "Maths": {
-    "Operation": {
-      "@ID": "Plus",
-      "Value": [
-        "2",
-        "3"
-      ],
+### ▶️ JSON Example
+
+#### curl
+```sh
+curl -X POST "https://localhost:5001/calculate" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "Maths": {
       "Operation": {
-        "@ID": "Multiplication",
-        "Value": [
-          "4",
-          "5"
-        ]
+        "@ID": "Plus",
+        "Value": [ "2", "3" ],
+        "Operation": {
+          "@ID": "Multiplication",
+          "Value": [ "4", "5" ]
+        }
       }
     }
-  }
-}
+  }'
 ```
-### XML Request
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
+### ▶️ XML Example
+#### curl
+```sh
+curl -X POST "https://localhost:5001/calculate" \
+  -H "Content-Type: application/xml" \
+  -H "Accept: application/xml" \
+  -d '<?xml version="1.0" encoding="UTF-8"?>
 <Maths>
   <Operation ID="Plus">
     <Value>2</Value>
@@ -92,7 +95,7 @@ To enable both XML and JSON request/response:
       <Value>5</Value>
     </Operation>
   </Operation>
-</Maths>
+</Maths>'
 ```
 ---
 
