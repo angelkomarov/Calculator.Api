@@ -35,50 +35,6 @@ It provides a flexible API that:
 
 ---
 
-## 🧪 Unit Tests (MSTest)
-
-The project uses **MSTest** along with **Moq** and `WebApplicationFactory` to validate functionality at multiple levels.  
-
-### 1️⃣ Service-Level Tests (`CalculatorServiceTests.cs`)  
-Validates the **core calculation engine**:  
-
-| Test Method | Purpose |
-|-------------|---------|
-| `Evaluate_PlusOperation_ReturnsCorrectSum` | Ensures addition returns the correct result (e.g., `2 + 3 = 5`). |
-| `Evaluate_MultiplicationOperation_ReturnsCorrectProduct` | Ensures multiplication returns the correct result (e.g., `4 × 5 = 20`). |
-| `Evaluate_NestedOperation_EvaluatesRecursively` | Confirms **recursive evaluation** of nested operations (e.g., `2 + 3 + (4 × 5) = 25`). |
-| `Evaluate_UnknownOperation_ThrowsException` | Verifies robust error handling when an unsupported operation (e.g., `Divide`) is used. |
-| `Evaluate_HandlesEmptyValuesAndNestedOnly` | Ensures correct fallback when values are missing but a nested operation exists (e.g., `Plus` with no values but a nested `Multiplication(3,3,3)` yields `27`). |
-
----
-
-### 2️⃣ API Unit Test with Mocking (`CalculateApiTests.cs`)  
-Validates the API controller **integration with the calculator service**, using **Moq**:  
-
-| Test Method | Purpose |
-|-------------|---------|
-| `PostJsonRequest_UsesMockedCalculator` | Ensures the controller correctly calls the calculator service. The mock forces a return value (`1234`) and verifies `Evaluate()` is invoked exactly once. |
-
----
-
-### 3️⃣ End-to-End Integration Tests (`CalculateApiIntegrationTests.cs`)  
-Validates the full **API pipeline** (request → deserialization → calculation → response):  
-
-| Test Method | Purpose |
-|-------------|---------|
-| `PostJsonRequest_ReturnsJsonResponse` | Confirms JSON requests are deserialized, processed recursively, and results returned as **application/json**. Verifies correct result (`25`). |
-| `PostXmlRequest_ReturnsXmlResponse` | Confirms XML requests are deserialized, processed recursively, and results returned as **application/xml**. Ensures `<Result>` element is present in response. |
-
----
-
-✅ Together, these tests cover:  
-- **Core calculation logic** (service).  
-- **Recursive evaluation of nested operations**.  
-- **Error handling** for unsupported operations and empty values.  
-- **API correctness** (mocked service + full request/response).  
-- **Format handling** (JSON and XML).  
-
----
 
 ## ⚙️ Why Custom Deserialization?
 The **input request structure is fixed and cannot be changed**.  
@@ -138,3 +94,49 @@ To enable both XML and JSON request/response:
   </Operation>
 </Maths>
 ```
+---
+
+## 🧪 Unit Tests (MSTest)
+
+The project uses **MSTest** along with **Moq** and `WebApplicationFactory` to validate functionality at multiple levels.  
+
+### 1️⃣ Service-Level Tests (`CalculatorServiceTests.cs`)  
+Validates the **core calculation engine**:  
+
+| Test Method | Purpose |
+|-------------|---------|
+| `Evaluate_PlusOperation_ReturnsCorrectSum` | Ensures addition returns the correct result (e.g., `2 + 3 = 5`). |
+| `Evaluate_MultiplicationOperation_ReturnsCorrectProduct` | Ensures multiplication returns the correct result (e.g., `4 × 5 = 20`). |
+| `Evaluate_NestedOperation_EvaluatesRecursively` | Confirms **recursive evaluation** of nested operations (e.g., `2 + 3 + (4 × 5) = 25`). |
+| `Evaluate_UnknownOperation_ThrowsException` | Verifies robust error handling when an unsupported operation (e.g., `Divide`) is used. |
+| `Evaluate_HandlesEmptyValuesAndNestedOnly` | Ensures correct fallback when values are missing but a nested operation exists (e.g., `Plus` with no values but a nested `Multiplication(3,3,3)` yields `27`). |
+
+---
+
+### 2️⃣ API Unit Test with Mocking (`CalculateApiTests.cs`)  
+Validates the API controller **integration with the calculator service**, using **Moq**:  
+
+| Test Method | Purpose |
+|-------------|---------|
+| `PostJsonRequest_UsesMockedCalculator` | Ensures the controller correctly calls the calculator service. The mock forces a return value (`1234`) and verifies `Evaluate()` is invoked exactly once. |
+
+---
+
+### 3️⃣ End-to-End Integration Tests (`CalculateApiIntegrationTests.cs`)  
+Validates the full **API pipeline** (request → deserialization → calculation → response):  
+
+| Test Method | Purpose |
+|-------------|---------|
+| `PostJsonRequest_ReturnsJsonResponse` | Confirms JSON requests are deserialized, processed recursively, and results returned as **application/json**. Verifies correct result (`25`). |
+| `PostXmlRequest_ReturnsXmlResponse` | Confirms XML requests are deserialized, processed recursively, and results returned as **application/xml**. Ensures `<Result>` element is present in response. |
+
+---
+
+✅ Together, these tests cover:  
+- **Core calculation logic** (service).  
+- **Recursive evaluation of nested operations**.  
+- **Error handling** for unsupported operations and empty values.  
+- **API correctness** (mocked service + full request/response).  
+- **Format handling** (JSON and XML).  
+
+---
