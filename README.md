@@ -140,3 +140,21 @@ Validates the full **API pipeline** (request → deserialization → calculation
 - **Format handling** (JSON and XML).  
 
 ---
+### ▶️ How to Run
+
+📥 Clone the repository:
+```
+git clone https://github.com/angelkomarov/Calculator.Api.git
+```
+
+📂 Navigate to the project folder:
+```
+cd Calculator.Api
+```
+
+⚡ Build and run the API:
+```
+dotnet run
+```
+
+🧪 Send a POST request with either XML or JSON input using Postman or curl.
