@@ -1,13 +1,17 @@
-# 📐 Calculator.Api
+# 📐 Calculator API – One Endpoint, Dual Format (JSON & XML)
 
 ## 📌 Description
-**Calculator.Api** is an example **ASP.NET Core C# calculator service** that demonstrates common concepts of **serialization, recursion, encapsulation, inheritance, and interfaces**.  
+**Calculator API** is an example **ASP.NET Core C# calculator service** that demonstrates common concepts of **serialization, recursion, encapsulation, inheritance, and interfaces**, with a special focus on **content negotiation**.
+
+This API is designed to handle **both JSON and XML requests using a single endpoint** (`/calculate`), without requiring clients to change their request structure.  
 
 It provides a flexible API that:  
-- Accepts **HTTP POST** requests with either **XML** or **JSON** input.  
+- Accepts **HTTP POST** requests in **JSON** or **XML**.  
 - Parses input using **serialization** (`System.Text.Json` & `System.Xml.Serialization`).  
 - Uses **interfaces, inheritance, and encapsulation** for extensibility.  
-- Returns results as **XML** or **JSON**, depending on the request’s `Accept` header.  
+- Returns results in the requested format (**JSON** or **XML**) depending on the `Accept` header.  
+
+✅ Key advantage: Clients can continue sending their **existing JSON or XML payloads** without any modification, while the API automatically handles deserialization and processing.
 
 ---
 
